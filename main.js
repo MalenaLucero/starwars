@@ -6,19 +6,17 @@ const searchMovie = () =>{
     const characterTwo = document.getElementById('characterTwo').value
     Routes(characterOne)
         .then(routes=>{
-            let movieTitles = routes.map(route=>{
-                async function name(route){
-                    let name = await fetchMovieName(route)
-                    return name
-                }
-                return name(route)
-            })
-            return movieTitles
+            async () =>{
+                let movies = await routes.map(route=>{
+                    async function name(route){
+                        let name = await fetchMovieName(route)
+                        return name
+                    }
+                    return name(route)
+                })
+                console.log(movies)
+            }
         })
-        .then(res=>{
-            console.log(res)
-        })
-    
 }
 
 async function Routes(character){
