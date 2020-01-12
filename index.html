@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="main.js" type="text/Javascript"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
     <h1>Starwars movie search</h1>
@@ -16,6 +17,10 @@
        <input id="characterTwo" placeholder="character"> 
     </label>
     <button id="searchButton" onClick="searchMovie()">Search</button>
+    <div id="loading" class="loading hide">
+        <p>Loading...</p>
+    </div c>
     <ul id="results"></ul>
+    <div id="errorMessage"></div>
 </body>
 </html>
