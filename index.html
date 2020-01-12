@@ -10,18 +10,20 @@
 </head>
 <body>
     <h1>Starwars movie search</h1>
-    <div>
-        <label>Character 1:</label>
-        <input id="characterOne" placeholder="Character's name">  
-    </div>
-    <div>
-        <label>Character 2:</label>
-        <input id="characterTwo" placeholder="Character's name"> 
-    </div>
-    <button id="searchButton" onClick="searchMovie()">Search</button>
+    <form>
+        <div>
+            <label>Character 1:</label>
+            <input id="characterOne" placeholder="Character's name">  
+        </div>
+        <div>
+            <label>Character 2:</label>
+            <input id="characterTwo" placeholder="Character's name"> 
+        </div>
+        <button id="searchButton" type="button" onClick="searchMovie()">Search</button>
+    </form>
     <div id="loading" class="loading hide">
         <p>Loading...</p>
-    </div c>
+    </div>
     <ul id="results"></ul>
     <div id="errorMessage"></div>
     <footer>
