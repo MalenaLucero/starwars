@@ -5,19 +5,19 @@ let charTwoMovies = []
 let sharedMovies = []
 
 const searchMovie = () =>{
-    //const characterOne = document.getElementById('characterOne').value
-    //const characterTwo = document.getElementById('characterTwo').value
-    Promise.all([fetchMovies(0, charOneMovies), fetchMovies(1, charTwoMovies)])
+    const characterOne = document.getElementById('characterOne').value
+    const characterTwo = document.getElementById('characterTwo').value
+    Promise.all([fetchMovies(characterOne, charOneMovies), fetchMovies(characterTwo, charTwoMovies)])
         .then(()=>{
             sharedMovies = getSharedMovies()
             printSharedMovies()
         })
 }
 
-async function fetchMovies(num, moviesArray){
+async function fetchMovies(character, moviesArray){
     let movieRoutes = await fetch('https://swapi.co/api/people')
         .then(res=>res.json())
-        .then(res=>res.results[num].films)
+        .then(res=>res.results.find(e=>e.name===character).films)
     for(let i=0; i<movieRoutes.length; i++){
         let title = await getMovieTitle(movieRoutes[i])
         moviesArray.push(title)
