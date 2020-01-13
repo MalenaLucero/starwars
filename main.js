@@ -31,7 +31,7 @@ const searchMovie = () =>{
             }) 
             .catch(()=>{
                 hideLoadingMessage()
-                showErrorMessage('Nothing was found. Please, try again.')
+                showErrorMessage('Something went wrong. Please, make sure there are no spelling mistakes.')
             })
     }else{
         showErrorMessage('Fill up the search inputs and try again.')
