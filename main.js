@@ -1,9 +1,8 @@
 //global variables
 let charOneMovies = [] //list of movies from the first character
-//let charOneCompleteName = '' //complete name of the first character as given by the API
 let charTwoMovies = [] //list of movies from the second character
-//let charTwoCompleteName = '' //complete name of the second character as given by the API
 let sharedMovies = [] //list of movies where both characters appear
+let charactersNames = [] //complete names of the two characters
 
 const searchMovie = () =>{
     event.preventDefault()
@@ -13,6 +12,7 @@ const searchMovie = () =>{
     innerHTMLCleaner('results')
     charOneMovies = []
     charTwoMovies = []
+    charactersNames = []
 
     //input by user
     const characterOne = document.getElementById('characterOne').value
@@ -20,7 +20,7 @@ const searchMovie = () =>{
 
     if(characterOne !== '' && characterTwo !== ''){
         showLoadingMessage()
-        Promise.all([fetchMovies(characterOne, charOneMovies), fetchMovies(characterTwo, charTwoMovies)])
+        Promise.all([fetchMovies(characterOne, 0, charOneMovies), fetchMovies(characterTwo, 1, charTwoMovies)])
             .then(()=>{
                 sharedMovies = []
                 sharedMovies = getSharedMovies()
@@ -39,7 +39,7 @@ const searchMovie = () =>{
 }
 
 //this function fills the empty list of movies with movie titles as strings
-async function fetchMovies(character, moviesArray){
+async function fetchMovies(character, index, moviesArray){
     let APIpageCounter = 1
     let characterInfo
     while(characterInfo === undefined && APIpageCounter < 10 ){
@@ -48,6 +48,7 @@ async function fetchMovies(character, moviesArray){
         console.log(characterInfo)
     }
     const movieRoutes = characterInfo.films
+    charactersNames[index] = characterInfo.name
     for(let i=0; i < movieRoutes.length; i++){
         let title = await getMovieTitle(movieRoutes[i])
         moviesArray.push(title)
@@ -57,7 +58,21 @@ async function fetchMovies(character, moviesArray){
 const getCharacterInfo = (character, pageNumber) =>{
     return fetch(`https://swapi.co/api/people/?page=${pageNumber}`)
         .then(res => res.json())
-        .then(res => res.results.find(e=>e.name.toUpperCase().indexOf(character.toUpperCase())===0))
+        .then(res => res.results
+                        .find(e=>{
+                            if(e.name.toUpperCase().includes(character.toUpperCase())){
+                                return e
+                            }else if(e.name.includes('-')){
+                                if(e.name.replace(/-/g,'').toUpperCase().includes(character.toUpperCase())){
+                                    return e
+                                }
+                            }else if(e.name.includes('é')){
+                                if(e.name.replace('é','e').toUpperCase().includes(character.toUpperCase())){
+                                    return e
+                                }
+                            }
+                        })
+            )
 }
 
 //returns the movie title and takes the API route as a parameter
@@ -84,7 +99,7 @@ const getSharedMovies = () =>{
 const printSharedMovies = () =>{
     const container = document.getElementById('results')
     const title = document.createElement('h3')
-    title.innerText = 'Results'
+    title.innerText = `Movies in which ${charactersNames[0]} and ${charactersNames[1]} appear`
     container.appendChild(title)
     if(sharedMovies.length === 0){
         const textItem = document.createElement('p')
@@ -97,7 +112,6 @@ const printSharedMovies = () =>{
         container.appendChild(listItem)
         })
     }
-    
 }
 
 const showErrorMessage = (errorMessage) =>{
