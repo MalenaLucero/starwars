@@ -1,4 +1,4 @@
-# Starwars Challenge
+# Star Wars Challenge
 
 Challenge for Lambda
 
