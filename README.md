@@ -13,5 +13,3 @@ If you want to download it and run it on your computer, download the zip file, e
 I left some useful `console.log()` in the code so that the API responses can be seen in the browser inspector.
 
 The file "test.js" has some unitary tests that can run on Node. If you don't have Node installed, you can get it from the official [Node website](https://nodejs.org/es/). Once you have Node on your computer, the file "test.js" runs with the command `node test.js` in both Windows and Linux. 
-
-This app has not been tested on Mac.
