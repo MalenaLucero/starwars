@@ -2,6 +2,8 @@
 
 Challenge for Lambda
 
+In this challenge, the user inputs the name of two Star Wars characters and the app will return the movies in which both characters appear.
+
 ## Getting started
 
 This is a very simple static webpage that can be accessed by just clicking on this link: https://malenalucero.github.io/starwars/

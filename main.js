@@ -24,6 +24,8 @@ const searchMovie = () =>{
             .then(()=>{
                 sharedMovies = []
                 sharedMovies = getSharedMovies()
+                console.log('shared:')
+                console.log(sharedMovies)
                 inputCleaner('characterOne')
                 inputCleaner('characterTwo')
                 hideLoadingMessage()
@@ -47,12 +49,15 @@ async function fetchMovies(character, index, moviesArray){
         APIpageCounter = APIpageCounter + 1
         console.log(characterInfo)
     }
-    const movieRoutes = characterInfo.films
-    charactersNames[index] = characterInfo.name
-    for(let i=0; i < movieRoutes.length; i++){
-        let title = await getMovieTitle(movieRoutes[i])
-        moviesArray.push(title)
-    }
+        const movieRoutes = characterInfo.films
+        charactersNames[index] = characterInfo.name
+        for(let i=0; i < movieRoutes.length; i++){
+            let title = await getMovieTitle(movieRoutes[i])
+            moviesArray.push(title)
+            console.log(charactersNames[index] + ':')
+            console.log(moviesArray)
+        }
+    
 }
 
 const getCharacterInfo = (character, pageNumber) =>{
