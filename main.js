@@ -49,16 +49,15 @@ async function fetchMovies(character, index, moviesArray){
         APIpageCounter = APIpageCounter + 1
         console.log(characterInfo)
     }
-    if(characterInfo !== undefined){
-        const movieRoutes = characterInfo.films
-        charactersNames[index] = characterInfo.name
-        for(let i=0; i < movieRoutes.length; i++){
-            let title = await getMovieTitle(movieRoutes[i])
-            moviesArray.push(title)
-            console.log(charactersNames[index] + ':')
-            console.log(moviesArray)
-        }
+    const movieRoutes = characterInfo.films
+    charactersNames[index] = characterInfo.name
+    for(let i=0; i < movieRoutes.length; i++){
+        let title = await getMovieTitle(movieRoutes[i])
+        moviesArray.push(title)
+        console.log(charactersNames[index] + ':')
+        console.log(moviesArray)
     }
+
 }
 
 const getCharacterInfo = (character, pageNumber) =>{
