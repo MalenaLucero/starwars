@@ -1,6 +1,6 @@
 # Star Wars Challenge
 
-When the user inputs the name of two Star Wars characters, the app will return the movies in which both characters appear.
+This app takes the name of two characters from Star Wars and returns the movies in which both of them appear.
 
 ## Getting started
 
